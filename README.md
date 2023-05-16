@@ -2,7 +2,7 @@
  * @Author: lihaitao
  * @Date: 2023-05-16 19:48:12
  * @LastEditors: Do not edit
- * @LastEditTime: 2023-05-16 20:23:30
+ * @LastEditTime: 2023-05-16 20:39:17
  * @FilePath: /lht/LexiLaw/README.md
 -->
 # LexiLaw - 中文法律大模型
@@ -109,24 +109,66 @@ LexiLaw 的训练数据是通过综合使用通用领域数据、专业法律数
         --output_dir /output \
         --deepspeed /ds_config.json \
     ```
-    训练参数量：
+    lora_rank = 32，训练参数量情况：
     ```
     trainable params: 14680064 || all params: 6187966464 || trainable%: 0.23723567484414862 
     ```
 
-2. **P-tuningv2**
+2. **P-tuning-v2**
+    运行 `sh ptuning.sh`
+    具体参数如下：
+    ```bash
+        CUDA_VISIBLE_DEVICES=${TOT_CUDA} deepspeed --master_port=$PORT --num_gpus=2 finetune_ptuning.py \
+            --train_path ./instrution_data.json \
+            --max_len 768 \
+            --max_input_len 512 \
+            --model_name_or_path /chatGLM-6B \
+            --tokenizer_name/chatGLM-6B \
+            --per_device_train_batch_size 8 \
+            --gradient_accumulation_steps 4 \
+            --num_train_epochs 10 \
+            --save_strategy epoch \
+            --learning_rate 5e-4 \
+            --fp16 \
+            --logging_steps 50 \
+            --pre_seq_len 128 \
+            --output_dir /output \
+            --deepspeed ds_config.json \
+    ```
+    pre_seq_len = 128，prefix_projection = True，训练参数量情况：
+    
+3. **Finetune**
+    运行`sh freeze.sh`
+    具体参数如下：
+    ```bash
+    CUDA_VISIBLE_DEVICES=${TOT_CUDA} deepspeed --master_port=$PORT --num_gpus=3 finetune_freeze.py \
+        --train_path  \
+        --max_len 768 \
+        --max_input_len 512 \
+        --model_name_or_path /chatGLM-6B \
+        --tokenizer_name /chatGLM-6B \
+        --per_device_train_batch_size 16 \
+        --gradient_accumulation_steps 4 \
+        --num_train_epochs 4 \
+        --save_strategy epoch \
+        --learning_rate 1e-5 \
+        --fp16 \
+        --remove_unused_columns false \
+        --logging_steps 50 \
+        --output_dir output_freeze \
+        --deepspeed ds_config.json \
+        ```
+    `finetune_freeze.py` 中设置只训练 `layers.27,layers.26,layers.25,layers.24,layers.23`。训练参数量情况：
 
 
-3. **Finetune**：除了 LoRA 和 p-tuningv2，我们还采用了 Finetune 方法对 LexiLaw 进行微调。Finetune 是一种常用的微调方法，通过在预训练模型的基础上继续进行训练，使模型能够更好地适应目标任务和数据。我们根据法律领域的特点和需求，使用丰富的法律数据对 LexiLaw 进行 Finetune，提高模型在法律问题解决方面的性能和可靠性。
 
-通过采用 LoRA、p-tuningv2 和 Finetune 这三种微调方式，我们不断优化和改进 LexiLaw 的法律咨询能力，使其能够提供更准确、全面的法律解释和建议。
+
 
 
 
 
 
 ## 贡献和改进
-
 
 贡献和改进是推动 LexiLaw 项目持续发展的重要因素。您可以通过以下方式参与和支持项目：
 
@@ -141,6 +183,16 @@ LexiLaw 的训练数据是通过综合使用通用领域数据、专业法律数
 - LexiLaw 是基于深度学习技术构建的，它可以提供有价值的法律建议和解释，但不应视为法律专家的替代品。在重要的法律事务中，建议您咨询专业的法律顾问或律师。
 
 - 本项目遵循适用的开源许可证。请在使用或分发代码之前，详细阅读项目中的许可证文件。
+
+## 致谢
+
+本项目参考了以下开源项目，在此对相关项目和研究开发人员表示感谢。
+
+- LawGPT_zh：https://github.com/LiuHC0428/LAW-GPT
+- Lawyer LLaMA：https://github.com/AndrewZhe/lawyer-llama
+- Laws： https://github.com/LawRefBook/Laws
+- ChineseNlpCorpus：https://github.com/murufeng/ChineseNlpCorpus
+- LuXun-GPT：https://github.com/Suffoquer-fang/LuXun-GPT
 
 ## 参与讨论
 
