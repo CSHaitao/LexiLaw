@@ -2,7 +2,7 @@
  * @Author: lihaitao
  * @Date: 2023-05-16 19:48:12
  * @LastEditors: Do not edit
- * @LastEditTime: 2023-05-16 20:39:17
+ * @LastEditTime: 2023-05-16 20:44:08
  * @FilePath: /lht/LexiLaw/README.md
 -->
 # LexiLaw - 中文法律大模型
@@ -136,6 +136,9 @@ LexiLaw 的训练数据是通过综合使用通用领域数据、专业法律数
             --deepspeed ds_config.json \
     ```
     pre_seq_len = 128，prefix_projection = True，训练参数量情况：
+    ```
+    trainable params: 957059072 || all params: 7130345472 || trainable%: 13.42233803058007
+    ```
     
 3. **Finetune**
     运行`sh freeze.sh`
@@ -159,6 +162,9 @@ LexiLaw 的训练数据是通过综合使用通用领域数据、专业法律数
         --deepspeed ds_config.json \
         ```
     `finetune_freeze.py` 中设置只训练 `layers.27,layers.26,layers.25,layers.24,layers.23`。训练参数量情况：
+    ```
+    trainable params: 1006899200 || all params: 6173286400 || trainable%: 16.31058620575258
+    ```
 
 
 
