@@ -160,7 +160,7 @@ LexiLaw 的训练数据是通过综合使用通用领域数据、专业法律数
         --logging_steps 50 \
         --output_dir output_freeze \
         --deepspeed ds_config.json \
-        ```
+    ```
     `finetune_freeze.py` 中设置只训练 `layers.27,layers.26,layers.25,layers.24,layers.23`。训练参数量情况：
     ```
     trainable params: 1006899200 || all params: 6173286400 || trainable%: 16.31058620575258
