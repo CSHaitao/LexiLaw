@@ -2,7 +2,7 @@
  * @Author: lihaitao
  * @Date: 2023-05-16 19:48:12
  * @LastEditors: Do not edit
- * @LastEditTime: 2023-05-16 19:48:13
+ * @LastEditTime: 2023-05-16 20:23:30
  * @FilePath: /lht/LexiLaw/README.md
 -->
 # LexiLaw - 中文法律大模型
@@ -32,10 +32,18 @@ LexiLaw 是一个经过微调的中文法律大模型，它基于 ChatGLM-6B 架
 ## 如何使用
 
 1. 克隆或下载本项目到您的本地环境。
+    ```
+    git clone https://github.com/CSHaitao/LexiLaw.git
+    cd LexiLaw
+    ```
 
-2. 安装所需的依赖项和配置环境（请参考项目文档中的说明）。
+2. 安装所需的依赖项和配置环境。
 
-3. 运行 LexiLaw 模型或将其集成到您的应用程序中。
+    ```
+    pip install -r requirements.txt
+    ```
+
+3. 下载训练好的参数[LoRA] [P-tuningv2] [Finetune]。
 
 4. 通过与模型进行交互，提供具体的法律问题或相关法律文本，LexiLaw 将根据您的输入提供相应的回答和解释。
 
@@ -45,7 +53,7 @@ LexiLaw 的训练数据是通过综合使用通用领域数据、专业法律数
 
 因此, 我们采用了以下数据组合来丰富模型的知识和能力：
 
-- **通用领域数据**：我们使用了大规模的通用领域文本数据集 [BELLE](https://github.com/LianjiaTech/BELLE) 1.5M，其中包括不同指令类型、不同领域的文本。通过引入通用领域数据，模型可以更好地理解自然语言和上下文信息，提高对各种问题的处理能力。
+- **通用领域数据**：我们使用了大规模的通用领域文本数据集 **[BELLE](https://github.com/LianjiaTech/BELLE)** 1.5M，其中包括不同指令类型、不同领域的文本。通过引入通用领域数据，模型可以更好地理解自然语言和上下文信息，提高对各种问题的处理能力。
 
 - **法律问答数据**：我们收集了丰富的法律问答数据，包括常见法律问题和相应的答案。这些问答数据涵盖了多个法律领域，如合同法、劳动法、知识产权等。通过使用这些数据，模型可以学习到常见法律问题的回答模式和解释能力。
 
@@ -75,6 +83,47 @@ LexiLaw 的训练数据是通过综合使用通用领域数据、专业法律数
 
 请注意，LexiLaw 的训练数据仅用于模型微调和改进，不包含个人敏感信息或侵犯隐私的内容。
 
+## 模型训练
+
+我们采用以下三种方式对 ChatGLM-6B 进行了深度微调,所有的模型都是在 7 张40G A100上训练模型，训练代码使用DeepSpeed和Trainer，具体说明可见[ChatGLM_mutli_gpu_tuning](https://github.com/CSHaitao/ChatGLM_mutli_gpu_tuning).
+
+1. **LoRA**
+    运行`sh lora.sh`  
+    具体参数如下：
+    ```bash
+    CUDA_VISIBLE_DEVICES=${TOT_CUDA} deepspeed --master_port=$PORT --num_gpus=7 lora.py \
+        --train_path ./instrution_data.json \
+        --max_len 768 \
+        --max_input_len 512 \
+        --model_name_or_path ./chatGLM-6B \
+        --tokenizer_name ./chatGLM-6B \
+        --lora_rank 32 \
+        --per_device_train_batch_size 12 \
+        --gradient_accumulation_steps 2 \
+        --num_train_epochs 6 \
+        --save_strategy epoch \
+        --learning_rate 5e-4 \
+        --fp16 \
+        --remove_unused_columns false \
+        --logging_steps 50 \
+        --output_dir /output \
+        --deepspeed /ds_config.json \
+    ```
+    训练参数量：
+    ```
+    trainable params: 14680064 || all params: 6187966464 || trainable%: 0.23723567484414862 
+    ```
+
+2. **P-tuningv2**
+
+
+3. **Finetune**：除了 LoRA 和 p-tuningv2，我们还采用了 Finetune 方法对 LexiLaw 进行微调。Finetune 是一种常用的微调方法，通过在预训练模型的基础上继续进行训练，使模型能够更好地适应目标任务和数据。我们根据法律领域的特点和需求，使用丰富的法律数据对 LexiLaw 进行 Finetune，提高模型在法律问题解决方面的性能和可靠性。
+
+通过采用 LoRA、p-tuningv2 和 Finetune 这三种微调方式，我们不断优化和改进 LexiLaw 的法律咨询能力，使其能够提供更准确、全面的法律解释和建议。
+
+
+
+
 
 ## 贡献和改进
 
@@ -98,5 +147,3 @@ LexiLaw 的训练数据是通过综合使用通用领域数据、专业法律数
 如果您对 LexiLaw 有任何疑问、建议或想法，欢迎加入我们的讨论。您可以联系 liht22@mails.tsinghua.edu.cn 提出问题、参与技术讨论或分享您的见解。
 
 我们衷心感谢您对 LexiLaw 项目的关注和参与！希望通过这个项目，能够为中文法律领域提供更智能、可靠的解决方案。
-
-1111
