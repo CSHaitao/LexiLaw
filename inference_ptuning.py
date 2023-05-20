@@ -1,66 +1,64 @@
+'''
+Author: lihaitao
+Date: 2023-05-20 15:06:50
+LastEditors: Do not edit
+LastEditTime: 2023-05-20 19:36:14
+'''
 from transformers import AutoModel
 import torch
 import os
-
-from transformers import AutoTokenizer
-
+os.environ["CUDA_VISIBLE_DEVICES"] = '0'
+from modeling_chatglm import ChatGLMForConditionalGeneration
+from tokenization_chatglm import ChatGLMTokenizer
+import torch
 from peft import PeftModel
 import argparse
 
-def generate(instruction, text):
+def generate(model,tokenizer,text):
     with torch.no_grad():
-        input_text = f"Instruction: {instruction}\nInput: {text}\nAnswer: "
+        input_text = text
         ids = tokenizer.encode(input_text)
         input_ids = torch.LongTensor([ids]).cuda()
-        output = peft_model.generate(
+        output = model.generate(
             input_ids=input_ids,
-            max_length=256,
+            min_length=20,
+            max_length=512,
             do_sample=False,
-            temperature=0.0,
+            temperature=0.7,
             num_return_sequences=1
         )[0]
         output = tokenizer.decode(output)
-        answer = output.split("Answer: ")[-1]
-    return answer.strip()
+        # answer = output.split(input_text)[-1]
+    return output.strip()
     
 
 if __name__ == "__main__":
 
     argparser = argparse.ArgumentParser()
-    argparser.add_argument("--base_model", type=str, default="/liuzyai04/thuir/lht/context_learning/chatGLM-6B")
-    argparser.add_argument("--lora", type=str, default="/liuzyai04/thuir/lht/luxun/adapter")
-    argparser.add_argument("--instruction", type=str, default=" ")
-    argparser.add_argument("--input_path", type=str, default="test.txt")
-    argparser.add_argument("--output_path", type=str, default="test_output.txt")
+    argparser.add_argument("--base_model", type=str, default="model/LexiLaw")
+    argparser.add_argument("--ptuning", type=str, default="ptuning/pytorch_model.bin")
     argparser.add_argument("--interactive", default=True)
 
     args = argparser.parse_args()
 
-    model = AutoModel.from_pretrained(args.base_model, trust_remote_code=True, load_in_8bit=True, device_map='auto', revision="v0.1.0")
-    tokenizer = AutoTokenizer.from_pretrained(args.base_model, trust_remote_code=True)
-    
-    if args.lora == "":
-        print("#> No lora model specified, using base model.")
-        peft_model = model.eval()
-    else:
-        print("#> Using lora model:", args.lora)
-        peft_model = PeftModel.from_pretrained(model, args.lora).eval()
-    torch.set_default_tensor_type(torch.cuda.FloatTensor)
+    config = AutoConfig.from_pretrained(args.base_model, trust_remote_code=True)
+    config.pre_seq_len = 128
+    config.prefix_projection = True
 
-    if args.interactive:
-        while True:
-            text = input("Input: ")
-            print(generate(args.instruction, text))
-    else:
-        with open(args.input_path, "r", encoding="utf-8") as f:
-            input_texts = [line.strip() for line in f]
-        output_texts = []
-        for text in input_texts:
-            output_texts.append(generate(args.instruction, text))
-        with open(args.output_path, "a+", encoding="utf-8") as f:
-            f.write("Model: " + args.lora + "\n")
-            f.write("Instruction: " + args.instruction + "\n\n")
-            for input_text, output_text in zip(input_texts, output_texts):
-                f.write("Input: " + input_text + "\n")
-                f.write("Output: " + output_text + "\n\n")
+    model = ChatGLMForConditionalGeneration.from_pretrained(args.base_model, trust_remote_code=True)
+    tokenizer = ChatGLMTokenizer.from_pretrained("model/LexiLaw", trust_remote_code=True)
+    
+    prefix_state_dict = torch.load(args.ptuning)
+    new_prefix_state_dict = {}
+    for k, v in prefix_state_dict.items():
+        if k.startswith("transformer.prefix_encoder."):
+            new_prefix_state_dict[k[len("transformer.prefix_encoder."):]] = v
+    model.transformer.prefix_encoder.load_state_dict(new_prefix_state_dict)
+    model.transformer.prefix_encoder.float()
+    model = model.half().cuda().eval()
+
+    while True:
+        text = input("Input: ")
+        print(generate(peft_model,tokenizer,text))
+
     
