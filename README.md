@@ -2,7 +2,7 @@
  * @Author: lihaitao
  * @Date: 2023-05-16 19:48:12
  * @LastEditors: Do not edit
- * @LastEditTime: 2023-05-20 15:57:13
+ * @LastEditTime: 2023-05-20 15:59:27
  * @FilePath: /lht/GitHub_code/LexiLaw/README.md
 -->
 # LexiLaw - 中文法律大模型
@@ -31,7 +31,7 @@ LexiLaw 是一个经过微调的中文法律大模型，它基于 ChatGLM-6B 架
 
 ## 如何使用
 
-### 命令行交互
+- 命令行交互
 
     1. 克隆或下载本项目到您的本地环境。
         ```
@@ -49,7 +49,7 @@ LexiLaw 是一个经过微调的中文法律大模型，它基于 ChatGLM-6B 架
 
     4. 运行`python inference_method.py`，通过与模型进行交互，提供具体的法律问题或相关法律文本，LexiLaw 将根据您的输入提供相应的回答和解释。
 
-### Demo交互
+- Demo交互
     除了简单的命令行交互，我们参考[Chinese-LangChain](https://github.com/yanqiangmiffy/Chinese-LangChain)实现了知识库增强的LexiLaw。
     
     1. 克隆或下载本项目到您的本地环境。
