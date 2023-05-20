@@ -2,7 +2,7 @@
  * @Author: lihaitao
  * @Date: 2023-05-16 19:48:12
  * @LastEditors: Do not edit
- * @LastEditTime: 2023-05-20 16:00:54
+ * @LastEditTime: 2023-05-20 16:03:15
  * @FilePath: /lht/GitHub_code/LexiLaw/README.md
 -->
 # LexiLaw - 中文法律大模型
@@ -147,7 +147,7 @@ LexiLaw 的训练数据是通过综合使用通用领域数据、专业法律数
         --output_dir /output \
         --deepspeed /ds_config.json \
     ```
-    lora_rank = 32，训练参数量情况：
+    lora_rank = 16，训练参数量情况：
     ```
     trainable params: 7340032 || all params: 6180626432 || trainable%: 0.11875870643139365  
     ```
@@ -209,6 +209,7 @@ LexiLaw 的训练数据是通过综合使用通用领域数据、专业法律数
 
 
 ## 模型效果对比
+
 **Input:** 施工方超过国家规定标准排放噪声，是否应当承担责任?
 
 | 模型     | 结果                                                                                                                   |
@@ -273,6 +274,7 @@ LexiLaw 的训练数据是通过综合使用通用领域数据、专业法律数
 - Laws：https://github.com/LawRefBook/Laws
 - ChineseNlpCorpus：https://github.com/murufeng/ChineseNlpCorpus
 - LuXun-GPT：https://github.com/Suffoquer-fang/LuXun-GPT
+- Chinese-LangChain：https://github.com/yanqiangmiffy/Chinese-LangChain
 
 ## 参与讨论
 
