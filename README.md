@@ -2,7 +2,7 @@
  * @Author: lihaitao
  * @Date: 2023-05-16 19:48:12
  * @LastEditors: Do not edit
- * @LastEditTime: 2023-05-20 16:41:39
+ * @LastEditTime: 2023-05-20 16:47:56
  * @FilePath: /lht/GitHub_code/LexiLaw/README.md
 -->
 # LexiLaw - 中文法律大模型
@@ -66,7 +66,7 @@ LexiLaw 是一个经过微调的中文法律大模型，它基于 ChatGLM-6B 架
         ```
     3. 下载训练好的参数[LexLaw_Finetune]放在`/model`目录下。
 
-    4. 下载text2vec模型[link]放在`LexiLaw/demo/text2vec`目录下。
+    4. 下载text2vec模型[link](https://huggingface.co/GanymedeNil/text2vec-large-chinese)放在`LexiLaw/demo/text2vec`目录下。
 
     5. 下载编码好的知识库向量放在`LexiLaw/demo/cache`目录下。LexiLaw开源了Legal_book与Legal_article的向量。
     
