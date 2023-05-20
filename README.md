@@ -2,7 +2,7 @@
  * @Author: lihaitao
  * @Date: 2023-05-16 19:48:12
  * @LastEditors: Do not edit
- * @LastEditTime: 2023-05-20 16:03:15
+ * @LastEditTime: 2023-05-20 16:16:31
  * @FilePath: /lht/GitHub_code/LexiLaw/README.md
 -->
 # LexiLaw - 中文法律大模型
@@ -76,6 +76,9 @@ LexiLaw 是一个经过微调的中文法律大模型，它基于 ChatGLM-6B 架
     | Legal_article         | 包含地方性法规、经济法、民法典、民法商法、社会法、司法解释、诉讼与非诉讼程序法、宪法、宪法相关法、刑法、行政法、行政法规等基本法条               | [Legal_article]() |
 
     6. 运行`python main.py`进入以下界面:
+    
+    ![image](./figure/LexiLaw.png)
+
 
     7. 选择知识库问答并加载相应的知识库，开始提问！
 
