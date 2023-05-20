@@ -2,7 +2,7 @@
  * @Author: lihaitao
  * @Date: 2023-05-16 19:48:12
  * @LastEditors: Do not edit
- * @LastEditTime: 2023-05-20 15:03:07
+ * @LastEditTime: 2023-05-20 15:57:13
  * @FilePath: /lht/GitHub_code/LexiLaw/README.md
 -->
 # LexiLaw - 中文法律大模型
@@ -31,21 +31,56 @@ LexiLaw 是一个经过微调的中文法律大模型，它基于 ChatGLM-6B 架
 
 ## 如何使用
 
-1. 克隆或下载本项目到您的本地环境。
-    ```
-    git clone https://github.com/CSHaitao/LexiLaw.git
-    cd LexiLaw
-    ```
+### 命令行交互
 
-2. 安装所需的依赖项和配置环境。
+    1. 克隆或下载本项目到您的本地环境。
+        ```
+        git clone https://github.com/CSHaitao/LexiLaw.git
+        cd LexiLaw
+        ```
 
-    ```
-    pip install -r requirements.txt
-    ```
+    2. 安装所需的依赖项和配置环境。
 
-3. 下载训练好的参数[LoRA] [P-tuningv2] [Finetune]。
+        ```
+        pip install -r requirements.txt
+        ```
 
-4. 通过与模型进行交互，提供具体的法律问题或相关法律文本，LexiLaw 将根据您的输入提供相应的回答和解释。
+    3. 下载训练好的参数[LoRA][P-tuningv2][Finetune]放在`/model`目录下。
+
+    4. 运行`python inference_method.py`，通过与模型进行交互，提供具体的法律问题或相关法律文本，LexiLaw 将根据您的输入提供相应的回答和解释。
+
+### Demo交互
+    除了简单的命令行交互，我们参考[Chinese-LangChain](https://github.com/yanqiangmiffy/Chinese-LangChain)实现了知识库增强的LexiLaw。
+    
+    1. 克隆或下载本项目到您的本地环境。
+        ```
+        git clone https://github.com/CSHaitao/LexiLaw.git
+        cd LexiLaw/demo
+        ```
+
+    2. 安装所需的依赖项和配置环境。
+
+        ```
+        pip install -r requirements.txt
+        ```
+    3. 下载训练好的参数[LexLaw_Finetune]放在`/model`目录下。
+
+    4. 下载text2vec模型[link]放在`LexiLaw/demo/text2vec`目录下。
+
+    5. 下载编码好的知识库向量放在`LexiLaw/demo/cache`目录下。LexiLaw开源了Legal_book与Legal_article的向量。
+    | 知识库              | 描述                                               | 下载链接                                                         |
+| ------------------ | --------------------------------------------------------- | ------------------------------------------------------------ |
+| Legal_book          | 包含法理学、国际法、国际经济法、国际私法、环境资源法、经济法、劳动与社会保障法、民法、民事诉讼法、商法、司法制度与法律职业道德、宪法、刑法、刑事诉讼法、知识产权法、中国特色社会主义法治理论的基本理论知识               | [Legal_book]()    |
+| Legal_article         | 包含地方性法规、经济法、民法典、民法商法、社会法、司法解释、诉讼与非诉讼程序法、宪法、宪法相关法、刑法、行政法、行政法规等基本法条               | [CSHaitao/SAILER_en]() |
+    6. 运行`python main.py`进入以下界面:
+
+    7. 选择知识库问答并加载相应的知识库，开始提问！
+
+
+
+    
+
+    
 
 ## 训练数据
 
@@ -85,7 +120,7 @@ LexiLaw 的训练数据是通过综合使用通用领域数据、专业法律数
 
 ## 模型训练
 
-我们采用以下三种方式对 ChatGLM-6B 进行了深度微调,所有的模型都是在 7 张40G A100上训练模型，训练代码使用DeepSpeed和Trainer，具体说明可见[ChatGLM_mutli_gpu_tuning](https://github.com/CSHaitao/ChatGLM_mutli_gpu_tuning).
+我们采用以下三种方式对 ChatGLM-6B 进行了深度微调,所有的模型都是在 7 张40G A100上训练模型，训练代码使用DeepSpeed和Trainer，具体说明可见[ChatGLM_mutli_gpu_tuning](https://github.com/CSHaitao/ChatGLM_mutli_gpu_tuning). 相关训练代码在`'/src`目录下。
 
 1. **LoRA**
     运行`sh lora.sh`  
