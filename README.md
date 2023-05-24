@@ -2,7 +2,7 @@
  * @Author: lihaitao
  * @Date: 2023-05-16 19:48:12
  * @LastEditors: Do not edit
- * @LastEditTime: 2023-05-24 11:10:54
+ * @LastEditTime: 2023-05-24 19:11:18
  * @FilePath: /lht/GitHub_code/LexiLaw/README.md
 -->
 # LexiLaw - 中文法律大模型
@@ -45,7 +45,10 @@ LexiLaw 是一个经过微调的中文法律大模型，它基于 ChatGLM-6B 架
         pip install -r requirements.txt
         ```
 
-    3. 下载训练好的参数[LoRA][P-tuningv2][Finetune]放在`/model`目录下。
+    3. 下载训练好的参数放在`/model`目录下。只开源了一个checkpoint，如果需要全部checkpoint，请联系liht22@mails.tsinghua.edu.cn
+        - [LexiLaw_finetune](https://drive.google.com/file/d/1buUUNjEVhx8PU1eBus3KitJzI5pdWbW_/view?usp=sharing)
+        - [LexiLaw_Ptuningv2](https://drive.google.com/file/d/1sTh_7DMsX9Cj95O7k1gfsYxB7d1d8soQ/view?usp=sharing)
+        - [LexiLaw_LoRA](https://drive.google.com/file/d/1p9kf1GCeaf1AzSv6ZyzEBO3DTgKDetHI/view?usp=sharing)
 
     4. 运行`python inference_method.py`，通过与模型进行交互，提供具体的法律问题或相关法律文本，LexiLaw 将根据您的输入提供相应的回答和解释。
 
@@ -91,6 +94,7 @@ LexiLaw 是一个经过微调的中文法律大模型，它基于 ChatGLM-6B 架
 
 ## 训练数据
 
+
 LexiLaw 的训练数据是通过综合使用通用领域数据、专业法律数据和法律文书进行微调而得到的。我们发现仅使用法律领域数据进行微调容易导致严重的过拟合现象，会导致模型忘掉原有的能力。
 
 因此, 我们采用了以下数据组合来丰富模型的知识和能力：
@@ -124,6 +128,8 @@ LexiLaw 的训练数据是通过综合使用通用领域数据、专业法律数
 通过综合利用通用领域数据、专业法律数据、法律问答数据和法律文书，LexiLaw 在处理法律问题时能够提供准确、全面的法律咨询和支持。
 
 请注意，LexiLaw 的训练数据仅用于模型微调和改进，不包含个人敏感信息或侵犯隐私的内容。
+
+所有训练数据下载链接[数据](https://drive.google.com/file/d/1K3FSmqxCuSyIe7wqTNiqNZTKNVMvbuUK/view?usp=sharing)
 
 ## 模型训练
 
