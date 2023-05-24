@@ -2,7 +2,7 @@
  * @Author: lihaitao
  * @Date: 2023-05-16 19:48:12
  * @LastEditors: Do not edit
- * @LastEditTime: 2023-05-24 19:11:18
+ * @LastEditTime: 2023-05-24 19:34:27
  * @FilePath: /lht/GitHub_code/LexiLaw/README.md
 -->
 # LexiLaw - 中文法律大模型
@@ -46,13 +46,14 @@ LexiLaw 是一个经过微调的中文法律大模型，它基于 ChatGLM-6B 架
         ```
 
     3. 下载训练好的参数放在`/model`目录下。只开源了一个checkpoint，如果需要全部checkpoint，请联系liht22@mails.tsinghua.edu.cn
-        - [LexiLaw_finetune](https://drive.google.com/file/d/1buUUNjEVhx8PU1eBus3KitJzI5pdWbW_/view?usp=sharing)
-        - [LexiLaw_Ptuningv2](https://drive.google.com/file/d/1sTh_7DMsX9Cj95O7k1gfsYxB7d1d8soQ/view?usp=sharing)
-        - [LexiLaw_LoRA](https://drive.google.com/file/d/1p9kf1GCeaf1AzSv6ZyzEBO3DTgKDetHI/view?usp=sharing)
+        - [LexiLaw_finetune](https://drive.google.com/file/d/1buUUNjEVhx8PU1eBus3KitJzI5pdWbW_/view?usp=sharing):包含pytorch_model-00001-of-00002.bin和pytorch_model-00002-of-00002.bin两个文件，其他配置文件与ChatGLM一致。
+        - [LexiLaw_Ptuningv2](https://drive.google.com/file/d/1sTh_7DMsX9Cj95O7k1gfsYxB7d1d8soQ/view?usp=sharing):包含pytorch_model.bin。
+        - [LexiLaw_LoRA](https://drive.google.com/file/d/1p9kf1GCeaf1AzSv6ZyzEBO3DTgKDetHI/view?usp=sharing):包含adapter_model.bin和adapter_config.json两个文件。
 
     4. 运行`python inference_method.py`，通过与模型进行交互，提供具体的法律问题或相关法律文本，LexiLaw 将根据您的输入提供相应的回答和解释。
 
     ![image](./figure/code.png)
+
 - ***Demo交互***
 
     除了简单的命令行交互，我们参考[Chinese-LangChain](https://github.com/yanqiangmiffy/Chinese-LangChain)实现了知识库增强的LexiLaw。
@@ -68,9 +69,9 @@ LexiLaw 是一个经过微调的中文法律大模型，它基于 ChatGLM-6B 架
         ```
         pip install -r requirements.txt
         ```
-    3. 下载训练好的参数[LexLaw_Finetune]放在`/model`目录下。
+    3. 下载训练好的参数放在`/model`目录下。
 
-    4. 下载text2vec模型[link](https://huggingface.co/GanymedeNil/text2vec-large-chinese)放在`LexiLaw/demo/text2vec`目录下。
+    4. 下载[text2vec模型](https://huggingface.co/GanymedeNil/text2vec-large-chinese)放在`LexiLaw/demo/text2vec`目录下。
 
     5. 下载编码好的知识库向量放在`LexiLaw/demo/cache`目录下。LexiLaw开源了Legal_book与Legal_article的向量。
     
