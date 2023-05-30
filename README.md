@@ -130,7 +130,6 @@ LexiLaw 的训练数据是通过综合使用通用领域数据、专业法律数
 
 请注意，LexiLaw 的训练数据仅用于模型微调和改进，不包含个人敏感信息或侵犯隐私的内容。
 
-所有训练数据下载链接[数据](https://drive.google.com/file/d/1K3FSmqxCuSyIe7wqTNiqNZTKNVMvbuUK/view?usp=sharing)
 
 ## 模型训练
 
