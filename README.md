@@ -302,6 +302,11 @@ LexiLaw 的训练数据是通过综合使用通用领域数据、专业法律数
 - LuXun-GPT：https://github.com/Suffoquer-fang/LuXun-GPT
 - Chinese-LangChain：https://github.com/yanqiangmiffy/Chinese-LangChain
 
+## Todo
+
+- [ ] 使用RLHF进行训练
+- [ ] 进行法律知识的预训练
+
 ## 参与讨论
 
 如果您对 LexiLaw 有任何疑问、建议或想法，欢迎加入我们的讨论。您可以联系 liht22@mails.tsinghua.edu.cn 提出问题、参与技术讨论或分享您的见解。
