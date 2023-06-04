@@ -11,7 +11,7 @@
 
 我会继续研究成文法和判例法体系的智慧司法研究，欢迎大家follow我关注最新动态，欢迎大家有新的想法与我交流！
 
-为类案检索设计的结构感知预训练语言模型[SAILER](https://github.com/CSHaitao/SAILER)已被SIGIR2023录用并开源！
+🔥为类案检索设计的结构感知预训练语言模型[SAILER](https://github.com/CSHaitao/SAILER)已被SIGIR2023录用并开源！
 
 ## 免责声明
 
