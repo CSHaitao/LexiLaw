@@ -58,7 +58,7 @@ LexiLaw 是一个经过微调的中文法律大模型，它基于 ChatGLM-6B 架
         ```
 
     3. 下载训练好的参数放在`/model`目录下。每种方法只开源了一个checkpoint。后续会陆续开源其他checkpoint供大家研究。
-        - [LexiLaw_finetune](https://drive.google.com/file/d/1buUUNjEVhx8PU1eBus3KitJzI5pdWbW_/view?usp=sharing):包含pytorch_model-00001-of-00002.bin和pytorch_model-00002-of-00002.bin两个文件，其他配置文件与ChatGLM一致。
+        - [LexiLaw_finetune](https://drive.google.com/file/d/1buUUNjEVhx8PU1eBus3KitJzI5pdWbW_/view?usp=sharing):包含pytorch_model-00001-of-00002.bin和pytorch_model-00002-of-00002.bin两个文件，其他配置文件与ChatGLM一致。[百度网盘链接](https://pan.baidu.com/s/12akBgZMlFUJ9NK-HIZh5uA?pwd=nmjp)（提取码: nmjp）
         - [LexiLaw_Ptuningv2](https://drive.google.com/file/d/1sTh_7DMsX9Cj95O7k1gfsYxB7d1d8soQ/view?usp=sharing):包含pytorch_model.bin。
         - [LexiLaw_LoRA](https://drive.google.com/file/d/1p9kf1GCeaf1AzSv6ZyzEBO3DTgKDetHI/view?usp=sharing):包含adapter_model.bin和adapter_config.json两个文件。
 
