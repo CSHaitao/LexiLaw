@@ -314,3 +314,16 @@ LexiLaw 的训练数据是通过综合使用通用领域数据、专业法律数
 如果您对 LexiLaw 有任何疑问、建议或想法，欢迎加入我们的讨论。您可以联系 liht22@mails.tsinghua.edu.cn 提出问题、参与技术讨论或分享您的见解。
 
 我们衷心感谢您对 LexiLaw 项目的关注和参与！希望通过这个项目，能够为中文法律领域提供更智能、可靠的解决方案。
+
+## Citations
+
+If you find our work useful, please do not save your star and cite our work:
+
+```
+@misc{LexiLaw,
+      title={Lexilaw: A Scalable Legal Language Model for Comprehensive Legal Understanding}, 
+      author={Haitao Li, Qingyao Ai, Qian Dong, Yiqun Liu},
+      year={2024},
+      url={https://github.com/CSHaitao/LexiLaw},
+}
+```
