@@ -322,7 +322,7 @@ If you find our work useful, please do not save your star and cite our work:
 ```
 @misc{LexiLaw,
       title={Lexilaw: A Scalable Legal Language Model for Comprehensive Legal Understanding}, 
-      author={Haitao Li, Qingyao Ai, Qian Dong, Yiqun Liu},
+      author={Haitao Li and Qingyao Ai and Qian Dong and Yiqun Liu},
       year={2024},
       url={https://github.com/CSHaitao/LexiLaw},
 }
