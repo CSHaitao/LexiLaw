@@ -58,6 +58,9 @@ LexiLaw 是一个经过微调的中文法律大模型，它基于 ChatGLM-6B 架
     2. 安装所需的依赖项和配置环境。
 
         ```
+        conda create --name LexiLaw
+        conda activate LexiLaw
+        conda install python=3.9
         pip install -r requirements.txt
         ```
 
